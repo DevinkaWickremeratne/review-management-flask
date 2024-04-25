@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 
 # Create a new user to run the application
-RUN addgroup -g 10014 choreo && \
+RUN addgroup --gid 10014 choreo && \
     adduser  --disabled-password  --no-create-home --uid 10014 --ingroup choreo choreouser
 USER 10014
 
