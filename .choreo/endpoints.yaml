@@ -1,0 +1,13 @@
+version: 0.1
+endpoints:
+  - name: Review Management
+
+    port: 5000
+
+    type: REST
+
+    networkVisibility: Public
+
+    schemaFilePath: openapi.yaml
+
+    context: /rs

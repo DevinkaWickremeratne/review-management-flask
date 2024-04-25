@@ -1,0 +1,182 @@
+openapi: 3.0.0
+paths:
+  "/conference/{conference_id}":
+    parameters:
+      - name: conference_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Conference"
+      summary: Get a conference by ID
+      operationId: get_conference
+      parameters:
+        - name: X-Fields
+          in: header
+          description: An optional fields mask
+          schema:
+            type: string
+            format: mask
+      tags:
+        - default
+  /conferences:
+    get:
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Conference"
+      summary: List all conferences
+      operationId: list_conferences
+      parameters:
+        - name: X-Fields
+          in: header
+          description: An optional fields mask
+          schema:
+            type: string
+            format: mask
+      tags:
+        - default
+  "/conferences/{conference_id}/reviews":
+    parameters:
+      - name: conference_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Review"
+      summary: List reviews for a specific conference
+      operationId: get_reviews_for_conference
+      parameters:
+        - name: X-Fields
+          in: header
+          description: An optional fields mask
+          schema:
+            type: string
+            format: mask
+      tags:
+        - default
+  /reviews:
+    get:
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Review"
+      summary: List all reviews
+      operationId: list_reviews
+      parameters:
+        - name: X-Fields
+          in: header
+          description: An optional fields mask
+          schema:
+            type: string
+            format: mask
+      tags:
+        - default
+info:
+  title: Conference API
+  version: "1.0"
+  description: API for managing conferences and reviews
+tags:
+  - name: default
+    description: Default namespace
+servers:
+  - url: /
+components:
+  responses:
+    ParseError:
+      description: When a mask can't be parsed
+    MaskError:
+      description: When any error occurs on mask
+  schemas:
+    Conference:
+      required:
+        - description
+        - end_date
+        - id
+        - location
+        - name
+        - overall_rating
+        - speakers
+        - start_date
+        - website
+      properties:
+        id:
+          type: integer
+          description: The conference ID
+        name:
+          type: string
+          description: The conference name
+        description:
+          type: string
+          description: The conference description
+        start_date:
+          type: string
+          format: date
+          description: The conference start date
+        end_date:
+          type: string
+          format: date
+          description: The conference end date
+        location:
+          type: string
+          description: The conference location
+        speakers:
+          type: array
+          description: List of speakers
+          items:
+            type: string
+        website:
+          type: string
+          description: The conference website
+        overall_rating:
+          type: number
+          description: The conference overall rating
+      type: object
+    Review:
+      required:
+        - conference_id
+        - description
+        - id
+        - rating
+        - user_id
+      properties:
+        id:
+          type: integer
+          description: The review ID
+        user_id:
+          type: integer
+          description: The user ID
+        conference_id:
+          type: integer
+          description: The conference ID
+        description:
+          type: string
+          description: The review description
+        rating:
+          type: number
+          description: The review rating
+      type: object
