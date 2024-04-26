@@ -1,7 +1,7 @@
 apiVersion: core.choreo.dev/v1beta1
 kind: ComponentConfig
 spec:
-inbound:
+  inbound:
     - name: Review Management
       port: 5000
       type: REST
