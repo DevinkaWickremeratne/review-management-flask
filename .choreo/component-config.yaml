@@ -1,0 +1,10 @@
+apiVersion: core.choreo.dev/v1beta1
+kind: ComponentConfig
+spec:
+  outbound:
+    serviceReferences:
+    - name: choreo:///pixelpioneer/summit-score/mvkdbw/2f6ac/v1.0/PUBLIC
+      connectionConfig: 01ef03e8-54b1-1a90-9efc-48548b3eff8e
+      env:
+      - from: ServiceURL
+        to: NEXT_PUBLIC_BASE_URL
