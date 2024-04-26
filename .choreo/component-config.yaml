@@ -1,6 +1,13 @@
 apiVersion: core.choreo.dev/v1beta1
 kind: ComponentConfig
 spec:
+inbound:
+    - name: Review Management
+      port: 5000
+      type: REST
+      networkVisibility: Public
+      context: /rs
+      schemaFilePath: openapi.yaml
   outbound:
     serviceReferences:
     - name: choreo:///pixelpioneer/summit-score/mvkdbw/2f6ac/v1.0/PUBLIC
