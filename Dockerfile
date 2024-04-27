@@ -5,17 +5,13 @@ FROM python:3.11-slim
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Set the working directory in the container
-WORKDIR /app
+WORKDIR /python-docker
 
-# Copy the dependencies file to the working directory
-COPY requirements.txt /app/
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
 
-# Install any dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the application code to the working directory
-COPY . /app/
+COPY . .
+RUN ls
 
 # Create a new user to run the application
 RUN addgroup --gid 10014 choreo && \
@@ -26,4 +22,4 @@ USER 10014
 EXPOSE 5000
 
 # Command to run the application
-CMD [ "flask", "run", "--host=0.0.0.0"]
+CMD ["python", "app.py"]
