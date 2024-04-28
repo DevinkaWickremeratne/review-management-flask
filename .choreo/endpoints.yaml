@@ -8,6 +8,6 @@ endpoints:
 
     networkVisibility: Public
 
-    context: /conferences
+    context: /
 
     schemaFilePath: openapi.yaml
