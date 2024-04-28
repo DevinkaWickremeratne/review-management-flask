@@ -1,12 +1,14 @@
 import os
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from models import Conference as ConferenceModel,Review
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 
 db = SQLAlchemy(app)
+
+from models import Conference as ConferenceModel,Review
+
 
 @app.route('/conferences', methods=['GET'])
 def get_conferences():
